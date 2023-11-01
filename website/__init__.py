@@ -9,8 +9,10 @@ def create_app():
 	app.config['SECRET_KEY'] = "MYKEY"
 
 
-	@app.route("/")
-	def home():
-		return "<h1>Hello World</h1>"
+	from .views import views
+	from .auth import auth
+
+	app.register_blueprint(views, url_prefix="/")
+	app.register_blueprint(auth, url_prefix="/")
 
 	return app
